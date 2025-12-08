@@ -1,0 +1,47 @@
+//  const express = require('express');
+
+//new way is this
+import express from "express";
+import cookieParser from "cookie-parser";  //to pass the token to the backend from the browser
+import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./utils/db.js";
+import userRoutes from "./routes/user.route.js";
+import companyRoute from "./routes/company.route.js";
+import jobRoutes from "./routes/job.route.js";
+import applicationRoutes from "./routes/application.route.js";
+
+
+dotenv.config();
+
+const app = express();
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+const corsOptions = {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Allow cookies to be sent
+};
+
+app.use(cors(corsOptions));
+
+const PORT = process.env.PORT || 3000;
+
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/company",companyRoute);
+app.use("/api/v1/company",companyRoute);
+app.use("/api/v2/company",jobRoutes);
+app.use("/api/v2/company",applicationRoutes);
+
+app.listen(PORT, () => {
+    connectDB();
+
+    console.log(`Server is running on port ${PORT}`);
+
+});
+
