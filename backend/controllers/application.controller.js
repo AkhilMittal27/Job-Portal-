@@ -95,7 +95,7 @@ export const getAppliedJobs = async (req, res) => {
 
 // admin will see who have applied for a particular job
 
-const getApplications = async (req, res) => {
+export const getApplicants = async (req, res) => {
     try {
         const jobId = req.params.id;
         const applications = await Application.find({ job: jobId }).populate({
@@ -124,8 +124,6 @@ const getApplications = async (req, res) => {
             success: false
         });
     }
-
-
 };
 
 export const updateStatus = async (req, res) => {

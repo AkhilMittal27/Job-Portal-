@@ -33,14 +33,15 @@ app.use(cors(corsOptions));
 const PORT = process.env.PORT || 3000;
 
 app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/company",companyRoute);
-app.use("/api/v1/company",companyRoute);
-app.use("/api/v2/company",jobRoutes);
-app.use("/api/v2/company",applicationRoutes);
+app.use("/api/v1/company", companyRoute);
+app.use("/api/v1/company", companyRoute);
+app.use("/api/v1/job", jobRoutes);
+app.use("/api/v1/application", applicationRoutes);
+
 
 app.listen(PORT, () => {
+    
     connectDB();
-
     console.log(`Server is running on port ${PORT}`);
 
 });
